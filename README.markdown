@@ -31,9 +31,7 @@ the resource.
 Usage
 =====
 
-      jsawk [OPTIONS] [SCRIPT]
-
-      Where OPTIONS are:
+**jsawk [OPTIONS] [SCRIPT]**
 
 Options
 -------
