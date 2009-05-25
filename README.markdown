@@ -39,7 +39,7 @@ Usage
 
 **jsawk [**options**] [**script**]**
 
-### Options ###
+### OPTIONS ###
 
   * **-h** <br />
     Print short help page and exit.
@@ -63,7 +63,7 @@ Usage
     processing JSON input. The `this` object is set to the whole JSON array
     or object.
 
-### Script ###
+### SCRIPT ###
 
 This is a snippet of JavaScript that will be run on each element of the
 input array, if input is a JSON array, or on the object if it's an object.
