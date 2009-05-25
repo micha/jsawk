@@ -43,13 +43,10 @@ Usage
 
   * **-h** Print short help page and exit.
   * **-n** Suppress printing of JSON result set.
-  * **-q \<query\>** 
-  
+  * **-q \<query\>** <br />
     Filter JSON through the specified 
     [JSONQuery](http://docs.persvr.org/documentation/jsonquery) query.
-
-  * **-f \<file\>** 
-
+  * **-f \<file\>** <br />
     Load and run the specified JavaScript file prior to
     processing JSON. This option can be specified multiple times to load
     multiple JavaScript libraries.
