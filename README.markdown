@@ -48,7 +48,7 @@ Usage
   * **-d \<delim\>** <br />
     Choose a token to indicate end of input. If this token appears on a
     line by itself then reading of JSON input will end. Otherwise, 10 blank
-    lines in a row will cause this. (Don't look at me, it's a spidermonkey
+    lines in a row will end input. (Don't look at me, this is a spidermonkey
     issue.) Default delimiter is a single period: `.`.
   * **-q \<query\>** <br />
     Filter JSON through the specified 
