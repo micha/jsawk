@@ -6,6 +6,9 @@ install it with the command `apt-get install spidermonkey-bin`. Or you can
 build it from source from [here](http://www.mozilla.org/js/spidermonkey/).
 Okay? Okay. Ready to go.
 
+Install It
+----------
+
 First, get the `jsawk` script:
 
       curl http://github.com/micha/jsawk/raw/master/jsawk > jsawk
@@ -14,8 +17,11 @@ Then make it executable and put it somewhere in your path:
 
       chmod 755 jsawk && mv jsawk ~/bin/
 
+Use It
+------
+
 Now you can do some stuff with JSON data. Here's an example using data from
-a REST service that serves JSON (we use micha/resty)
+a REST service that serves JSON (we use [resty](http://github.com/micha/resty))
 to do the HTTP requests):
 
       resty http://example.com:8080/data*.json
