@@ -67,12 +67,15 @@ Usage
 
 This is a snippet of JavaScript that will be run on each element of the
 input array, if input is a JSON array, or on the object if it's an object.
-The `this` object is set to the current element on which it's running.
+The `this` object is set to the current array element or object.
 
-Script JS Environment
+Scripting Environment
 =====================
 
-The script is a fun
+  * **err(**_Object|Array|String_**)**<br />
+    Print arguments (JSON encoded, if necessary) to stderr.
+  * **out(**_Object|Array|String_**)**<br />
+    Print arguments (JSON encoded, if necessary) to stdout.
 
 Errors and Output
 =================
