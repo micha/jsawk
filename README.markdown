@@ -37,12 +37,14 @@ the resource.
 Usage
 =====
 
-**jsawk [**OPTIONS**] [**SCRIPT**]**
+**jsawk [**options**] [**script**]**
 
 ### Options ###
 
-  * **-h** Print short help page and exit.
-  * **-n** Suppress printing of JSON result set.
+  * **-h** <br />
+    Print short help page and exit.
+  * **-n** <br />
+    Suppress printing of JSON result set.
   * **-q \<query\>** <br />
     Filter JSON through the specified 
     [JSONQuery](http://docs.persvr.org/documentation/jsonquery) query.
@@ -50,6 +52,9 @@ Usage
     Load and run the specified JavaScript file prior to
     processing JSON. This option can be specified multiple times to load
     multiple JavaScript libraries.
+  * **-b \<script\>|-e \<script\>** <br />
+    Run the specified snippet of JavaScript before (**-b**) or after (**-e**)
+    processing JSON input.
 
 ### Script ###
 
