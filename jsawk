@@ -870,6 +870,16 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       doPrint(type, ret);
     }
   };
+  window.$ = function() {
+    try {
+      var ret = JSONQuery.apply(window, arguments);
+      ret.length;
+      return ret;
+    } catch (e) {
+      err("jsawk: JSONQuery parse error: '"+arguments[0]+"'");
+      quit(4);
+    }
+  };
   window.out = function() {
     var args  = Array.prototype.slice.call(arguments);
     args.unshift("OUT:");
@@ -880,20 +890,47 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     args.unshift("ERR:");
     doJsonPrint.apply(window, args);
   };
-})(window.print);
-
-(function() {
-  window.makeFilter = function(fun) {
-    return eval("function() { "+fun+"; return this }");
+  window.doJson = function(input) {
+    try {
+      return eval("("+input+")");
+    } catch (e) {
+      err("jsawk: JSON parse error: '"+input+"'");
+      quit(2);
+    }
   };
-})();
+  window.doCall = function(fun, obj) {
+    try {
+      return fun.call(obj);
+    } catch (e) {
+      err("jsawk: js error: "+e);
+      quit(3);
+    }
+  };
+  window.makeFilter = function(fun) {
+    try {
+      return eval("function() { "+fun+"; return this }");
+    } catch (e) {
+      err("jsawk: script parse error: '"+fun+"'");
+      quit(3);
+    }
+  };
+  window.makeBeforeAfter = function(fun) {
+    try {
+      return eval("function() { "+fun+" }");
+    } catch (e) {
+      err("jsawk: script parse error: '"+fun+"'");
+      quit(3);
+    }
+  };
+})(window.print);
 
 (function(argv) {
   argv = Array.prototype.slice.call(argv);
 
   var usage = function() {
-    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] [-b script] \\\n"+
-        "           [-e script] [script]");
+    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] "+
+        "[-b script] \\\n"+
+        "           [-a script] [script]");
     quit(1);
   };
 
@@ -901,6 +938,8 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var fun = "";
   var noprint = false;
   var end = ".";
+  var befores = [];
+  var afters  = [];
 
   var arg;
 
@@ -924,6 +963,14 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         if (argv.length < 1) usage();
         load(argv.shift());
         break;
+      case "-b":
+        if (argv.length < 1) usage();
+        befores.push(makeBeforeAfter(argv.shift()));
+        break;
+      case "-a":
+        if (argv.length < 1) usage();
+        afters.push(makeBeforeAfter(argv.shift()));
+        break;
       default:
         if (argv.length > 0) usage();
         fun = arg;
@@ -942,49 +989,34 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       blankcount++;  
     else  
       blankcount=0;  
-    if (line=="END") break;  
+    if (line==end) break;  
     input += line;  
     input += "\n";  
   }  
   input = input.substring(0, input.length-blankcount);  
 
-  var json, wrapped;
-  
-  try {
-    json = eval("("+input+")");
-    wrapped = false;
-  } catch (e) {
-    err("jsawk: JSON parse error: '"+input+"'");
-    quit(2);
-  }
+  var json    = doJson(input);
+  var wrapped = !(json instanceof Array);
 
-  if (! (json instanceof Array)) {
-    wrapped = true;
+  if (wrapped)
     json = [ json ];
-  }
 
-  var f;
+  var f = makeFilter(fun);
 
-  try {
-    f = makeFilter(fun);
-  } catch (e) {
-    err("jsawk: script parse error: '"+fun+"'");
-    quit(3);
-  }
+  json = $(pat, json);
 
-  try {
-    json = JSONQuery(pat, json);
-    json.length;
-  } catch (e) {
-    err("jsawk: JSONQuery parse error: '"+pat+"'");
-    quit(4);
-  }
+  for (i in befores)
+    doCall(befores[i], json);
 
   var ret = [];
+
   for (var i=0; i<json.length; i++) {
-    var tmp = f.call(json[i]);
-    if (tmp !== null) ret.push(tmp);
+    var tmp = doCall(f, json[i]);
+    if (tmp != null) ret.push(tmp);
   }
+
+  for (i in afters)
+    doCall(afters[i], json);
 
   if (wrapped)
     ret = ret[0];
