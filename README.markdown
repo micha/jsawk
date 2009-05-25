@@ -60,11 +60,19 @@ Usage
   * **-b \<script\>** <br />
     **-a \<script\>** <br />
     Run the specified snippet of JavaScript before (**-b**) or after (**-a**)
-    processing JSON input.
+    processing JSON input. The `this` object is set to the whole JSON array
+    or object.
 
 ### Script ###
 
-This is a snippet of JavaScript that will be run 
+This is a snippet of JavaScript that will be run on each element of the
+input array, if input is a JSON array, or on the object if it's an object.
+The `this` object is set to the current element on which it's running.
+
+Script JS Environment
+=====================
+
+The script is a fun
 
 Errors and Output
 =================

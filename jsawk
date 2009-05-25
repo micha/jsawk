@@ -2,6 +2,8 @@
 
 TMP=`mktemp`
 
+trap "rm -f $TMP" SIGINT SIGTERM
+
 cat <<'__END__' > $TMP
 window    = this;
 window.$_ = null;
@@ -1033,5 +1035,7 @@ err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 
 [ -n "$err" ] && echo "$err" 1>&2
 [ -n "$out" ] && echo "$out"
+
+rm -f $TMP
 
 exit $ret
