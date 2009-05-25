@@ -889,50 +889,32 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 })();
 
 (function(argv) {
-  var input="", line="", blankcount="0";  
-
   argv = Array.prototype.slice.call(argv);
 
   var usage = function() {
-    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [script]");
+    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] [-b script] \\\n"+
+        "           [-e script] [script]");
     quit(1);
   };
-
-
-  // Spidermonkey can't read input well. This is a workaround
-  // from http://whereisandy.com/code/jslint/.
-
-  while (blankcount < 10){  
-    line=readline();  
-
-    if (line=="")  
-      blankcount++;  
-    else  
-      blankcount=0;  
-    if (line=="END") break;  
-    input += line;  
-    input += "\n";  
-  }  
-  input = input.substring(0, input.length-blankcount);  
-
-  var json = eval("("+input+")");
-  var wrapped = false;
-
-  if (! (json instanceof Array)) {
-    wrapped = true;
-    json = [ json ];
-  }
 
   var pat = "[*]";
   var fun = "";
   var noprint = false;
+  var end = ".";
 
   var arg;
 
   while (arg = argv.shift()) {
     switch(arg) {
+      case "-h":
+        usage();
+        break;
       case "-n":
         noprint = true;
+        break;
+      case "-d":
+        if (argv.length < 1) usage();
+        end = argv.shift();
         break;
       case "-q":
         if (argv.length < 1) usage();
@@ -948,17 +930,54 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     }
   }
 
-  if (argv.length > 0)
-    fun = argv.shift();
+  // Spidermonkey can't read input well. This is a workaround
+  // from http://whereisandy.com/code/jslint/.
 
-  var f = makeFilter(fun);
+  var input="", line="", blankcount="0";  
+
+  while (blankcount < 10){  
+    line=readline();  
+
+    if (line=="")  
+      blankcount++;  
+    else  
+      blankcount=0;  
+    if (line=="END") break;  
+    input += line;  
+    input += "\n";  
+  }  
+  input = input.substring(0, input.length-blankcount);  
+
+  var json, wrapped;
+  
+  try {
+    json = eval("("+input+")");
+    wrapped = false;
+  } catch (e) {
+    err("jsawk: JSON parse error: '"+input+"'");
+    quit(2);
+  }
+
+  if (! (json instanceof Array)) {
+    wrapped = true;
+    json = [ json ];
+  }
+
+  var f;
+
+  try {
+    f = makeFilter(fun);
+  } catch (e) {
+    err("jsawk: script parse error: '"+fun+"'");
+    quit(3);
+  }
 
   try {
     json = JSONQuery(pat, json);
     json.length;
   } catch (e) {
-    err("jsq: JSONQuery parse error: '"+pat+"'");
-    quit(2);
+    err("jsawk: JSONQuery parse error: '"+pat+"'");
+    quit(4);
   }
 
   var ret = [];
