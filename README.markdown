@@ -57,7 +57,8 @@ Usage
     Load and run the specified JavaScript file prior to
     processing JSON. This option can be specified multiple times to load
     multiple JavaScript libraries.
-  * **-b \<script\>|-a \<script\>** <br />
+  * **-b \<script\>** <br />
+    **-a \<script\>** <br />
     Run the specified snippet of JavaScript before (**-b**) or after (**-a**)
     processing JSON input.
 
