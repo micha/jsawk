@@ -72,7 +72,7 @@ The `this` object is set to the current array element or object.
 Scripting Environment
 =====================
 
-  * **err(**_Object|Array|String_**)**<br />
+  * **err(**_Object_**|**_Array_**|**_String_**)**<br />
     Print arguments (JSON encoded, if necessary) to stderr.
   * **out(**_Object|Array|String_**)**<br />
     Print arguments (JSON encoded, if necessary) to stdout.
