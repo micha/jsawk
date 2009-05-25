@@ -33,8 +33,7 @@ Usage
 
 **jsawk [OPTIONS] [SCRIPT]**
 
-Options
--------
+### Options ###
 
   * **-h** Print short help page and exit.
   * **-n** Suppress printing of JSON result set.
@@ -44,8 +43,7 @@ Options
     processing JSON. This option can be specified multiple times to load
     multiple JavaScript libraries.
 
-Script
-------
+### Script ###
 
 This is a snippet of JavaScript that will be run 
 
