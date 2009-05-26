@@ -112,7 +112,7 @@ Jsawk JavaScript Environment
 ### JSONQuery ###
 
   * **$(**_query_**, **_thing_**)** <br />
-    Runs the JSONQuery _query_ on the JSON _thing_.
+    Runs the JSONQuery _query_ on the JSON _thing_. <br />
     **param:** _query_ String JSONQuery query. <br />
     **param:** _thing_ Array input. <br />
     **return:** Array result of running the query.
