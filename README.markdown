@@ -51,36 +51,42 @@ Usage
 
       jsawk [OPTIONS] [SCRIPT]
 
-### OPTIONS
+      OPTIONS
+      -------
 
-  * `-h` <br />
-    Print short help page and exit.
-  * `-n` <br />
-    Suppress printing of JSON result set.
-  * `-d <delim>` <br />
-    Choose a token to indicate end of input. If this token appears on a
-    line by itself then reading of JSON input will end. Otherwise, 10 blank
-    lines in a row will end input. (Don't look at me, this is a spidermonkey
-    issue.) Default delimiter is a single period: `.`.
-  * `-q <query>` <br />
-    Filter JSON through the specified 
-    [JSONQuery](http://docs.persvr.org/documentation/jsonquery) query.
-  * `-f <file>` <br />
-    Load and run the specified JavaScript file prior to
-    processing JSON. This option can be specified multiple times to load
-    multiple JavaScript libraries.
-  * `-b <script>` <br />
-    `a <script>` <br />
-    Run the specified snippet of JavaScript before (**-b**) or after (**-a**)
-    processing JSON input. The `this` object is set to the whole JSON array
-    or object. This is used to preprocess (**-b**) or postprocess (**-a**) the
-    JSON array before or after the main script is applied.
+      -h
+          Print short help page and exit.
 
-### SCRIPT
+      -n
+          Suppress printing of JSON result set.
 
-This is a snippet of JavaScript that will be run on each element of the
-input array, if input is a JSON array, or on the object if it's an object.
-The `this` object is set to the current array element or object.
+      -d <delim>
+          Choose a token to indicate end of input. If this token appears on
+          a line by itself then reading of JSON input will end. Otherwise,
+          10 blank lines in a row will end input. (Don't look at me, this
+          is a spidermonkey issue.) Default delimiter is a single period.
+
+      -q <query>
+          Filter JSON through the specified JSONQuery query.
+
+      -f <file>
+          Load and run the specified JavaScript file prior to processing
+          JSON. This option can be specified multiple times to load multiple
+          JavaScript libraries.
+
+      -b <script> | -a <script>
+          Run the specified snippet of JavaScript before (-b) or after (-a)
+          processing JSON input. The `this` object is set to the whole JSON
+          array or object. This is used to preprocess (-b) or postprocess
+          (-a) the JSON array before or after the main script is applied.
+
+      SCRIPT
+      ------
+
+      This is a snippet of JavaScript that will be run on each element
+      of the input array, if input is a JSON array, or on the object if
+      it's an object. For each iteration, the `this` object is set to the
+      current element.
 
 Jsawk Scripting
 ===============
