@@ -15,7 +15,7 @@ Setup
 
 You need to have the `js` interpreter installed. On a Debian system you can
 install it with the command `apt-get install spidermonkey-bin`. Or you can 
-build it from source from [here](http://www.mozilla.org/js/spidermonkey/).
+[build it from source](http://www.mozilla.org/js/spidermonkey/).
 Ready? Go.
 
 Install
@@ -373,8 +373,8 @@ zero for success.
 JSON Pretty-Printing
 ====================
 
-[Resty](http://github.com/micha/resty] includes a `pp` script will 
+[Resty](http://github.com/micha/resty) includes the `pp` script that will 
 pretty-print JSON for you. You just need to install the JSON perl module 
-from CPAN.
+from CPAN. Use it like this:
 
       GET /blogs.json | jsawk -q '..author' | pp
