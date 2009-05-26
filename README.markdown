@@ -51,7 +51,7 @@ Usage
 
 **jsawk [**options**] [**script**]**
 
-### OPTIONS ###
+### OPTIONS
 
   * **-h** <br />
     Print short help page and exit.
@@ -76,7 +76,7 @@ Usage
     or object. This is used to preprocess (**-b**) or postprocess (**-a**) the
     JSON array before or after the main script is applied.
 
-### SCRIPT ###
+### SCRIPT
 
 This is a snippet of JavaScript that will be run on each element of the
 input array, if input is a JSON array, or on the object if it's an object.
@@ -114,19 +114,19 @@ Jsawk uses the Spidermonkey JavaScript interpreter, so you have access to all
 of the Spidermonkey functions and whatnot. Additionally, the following
 functions and properties are available from within a jsawk script:
 
-### Properties ###
+### Properties
 
   * **window** <br />
     The global object.
 
-### JSON ###
+### JSON
 
   * **JSON.stringify(**_thing_**)** <br />
     Serialize _thing_ to JSON string. <br />
     **param:** _thing_ Object or Array. <br />
     **return:** String JSON result.
 
-### JSONQuery ###
+### JSONQuery
 
   * **$(**_query_**, **_thing_**)** <br />
     Runs the JSONQuery _query_ on the JSON _thing_. <br />
@@ -134,7 +134,7 @@ functions and properties are available from within a jsawk script:
     **param:** _thing_ Array input. <br />
     **return:** Array result of running the query.
 
-### Input/Output ###
+### Input/Output
 
   * **err(**_thing_**)** <br />
     Print arguments (JSON encoded, if necessary) to stderr. <br />
@@ -212,19 +212,32 @@ generally are done with a script that follows one of these simple patterns:
 These patterns leave the records in JSON format, and they are automatically
 printed to stdout without the use of the `out()` function.
 
-### The Identity Mapping ###
+### The Identity Mapping
 
-This doesn't really do anything:
+This is the identity transformation: it doesn't really do anything other
+than pass the input straight through.
 
       cat /tmp/t | jsawk
 
 You should get the input back out, unmolested.
 
-Flatten The "Sports" Array Of Each Element
-------------------------------------------
+### Increment Everyone's Age
 
-Replace the "sports" array with a simple string containing the different
-sports, separated by commas, for example.
+Looks like it's everyone's birthday today. We'll take the JSON input and
+increment each object's `age` property, sending the resulting JSON output to
+stdout.
+
+      cat /tmp/t | jsawk 'this.age++'
+
+Notice that there is no need to write `return this` in the script. That is
+assumed---the runtime does it for you automatically if you don't explicitly
+call `return` yourself.
+
+### Flatten The "Sports" Array Of Each Element
+
+Here we modify the input by replacing the `sports` property of each object
+in the input array (the `sports` property is itself an array of strings) with
+a single string containing all the person's sports separated by commas.
 
       cat /tmp/t | jsawk 'this.sports = this.sports.join(",")'
 
@@ -256,17 +269,6 @@ Notice the use of JSONQuery to drill down into the JSON objects, an "after"
 script to collate the results, and everything piped to the Unix `uniq`
 tool to remove duplicate entries.  This is starting to show the power of 
 the awk-like behavior.
-
-Increment Everyone's Age
-------------------------
-
-Looks like it's everyone's birthday today.
-
-      cat /tmp/t | jsawk 'this.age++'
-
-Notice that there is no need to write `return this` in the script. That is
-assumed, and the runtime does it for you automatically if you don't explicitly
-call `return` yourself.
 
 JSON Pretty-Printing
 ====================
