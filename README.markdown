@@ -129,7 +129,7 @@ Jsawk JavaScript Environment
     **return:** void.
 
 Errors and Output
-=================
+-----------------
 
 Errors in parsing scripts, JSON queries, or JSON input, and errors executing
 scripts will all result in the appropriate error message on stderr, and
@@ -138,7 +138,7 @@ stdout, unless the `-n` option is specified. In that case only output from
 the `out()` or `err()` functions and error messages will appear.
 
 Exit Status
-===========
+-----------
 
 On successful completion jsawk returns an exit status of `0`. If an error
 ocurred and execution was aborted, a non-zero exit status will be returned.
@@ -181,7 +181,8 @@ following contents:
 
 This is going to be the input JSON text we will use in the examples.
 
-### The Identity Mapping ###
+The Identity Mapping
+--------------------
 
 This doesn't really do anything:
 
@@ -189,7 +190,8 @@ This doesn't really do anything:
 
 You should get the input back out, unmolested.
 
-### Flatten The "Sports" Array Of Each Element ###
+Flatten The "Sports" Array Of Each Element
+------------------------------------------
 
 Replace the "sports" array with a simple string containing the different
 sports, separated by commas, for example.
@@ -199,7 +201,8 @@ sports, separated by commas, for example.
 Notice how altering the `this` object in place alters the result array
 accordingly.
 
-### Count How Many Elements Are In The Input Array ###
+Count How Many Elements Are In The Input Array
+----------------------------------------------
 
 This example uses a "before" script, and the `-n` option to disable the
 automatic printing of the result.
@@ -209,7 +212,8 @@ automatic printing of the result.
 Since regular result output is disabled, only the `out(this.length)` call
 produces any output. Also, notice how `this` was set to the input array.
 
-### Get A List Of All Sports ###
+Get A List Of All Sports
+------------------------
 
 This one generates a list of all the sports that are played by the people
 in our little JSON list, one per line, unique entries only.
