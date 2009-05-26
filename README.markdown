@@ -9,7 +9,7 @@ Okay? Okay. Ready to go.
 Install It
 ----------
 
-First, get the `jsawk` script:
+First, get the jsawk script:
 
       curl http://github.com/micha/jsawk/raw/master/jsawk > jsawk
 
@@ -28,7 +28,7 @@ to do the HTTP requests):
       GET /people/47 | jsawk 'this.favoriteColor = "blue"' | PUT /people/47
 
 This would do a `GET` request on the resource `/data/people/47.json`, which
-would result in a JSON object. Then `jsawk` takes the JSON via stdin and for
+would result in a JSON object. Then jsawk takes the JSON via stdin and for
 each JSON object it runs the little snippet of JavaScript, setting the
 `favoriteColor` property to `"blue"`, in this case. The modified JSON is then
 output via stdout to `resty` again, which does the `PUT` request to update
@@ -69,8 +69,23 @@ This is a snippet of JavaScript that will be run on each element of the
 input array, if input is a JSON array, or on the object if it's an object.
 The `this` object is set to the current array element or object.
 
-Scripting Environment
-=====================
+Jsawk Scripting
+===============
+
+Jsawk is intended to serve the purpose that is served by `awk` in the shell
+environment, but instead of working with words and lines of text, it works
+with JavaScript objects and arrays of objects.
+
+In awk, a text file is split into an array of "records", each of which being
+an array of "fields". The awk script that is specified on the command line is
+run once for each record in the array, with the `$1`, `$2`, etc. variables
+set to the various fields in the record.
+
+Jsawk is similar, but in jsawk records are elements of the JSON input array
+(if the input was a single object then there is a single record consisting
+of that object). The jsawk script is run once for each record object, with
+the `this` object set to the current record. So here the properties of the
+record object are equivalent to the `$1`, `$2`, etc. in awk.
 
 ### JSONQuery ###
 

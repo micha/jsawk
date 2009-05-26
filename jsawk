@@ -916,14 +916,6 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       quit(3);
     }
   };
-  window.makeBeforeAfter = function(fun) {
-    try {
-      return eval("function() { "+fun+" }");
-    } catch (e) {
-      err("jsawk: script parse error: '"+fun+"'");
-      quit(3);
-    }
-  };
 })(window.print);
 
 (function(argv) {
@@ -967,11 +959,11 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         break;
       case "-b":
         if (argv.length < 1) usage();
-        befores.push(makeBeforeAfter(argv.shift()));
+        befores.push(makeFilter(argv.shift()));
         break;
       case "-a":
         if (argv.length < 1) usage();
-        afters.push(makeBeforeAfter(argv.shift()));
+        afters.push(makeFilter(argv.shift()));
         break;
       default:
         if (argv.length > 0) usage();
@@ -1008,7 +1000,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   json = $(pat, json);
 
   for (i in befores)
-    doCall(befores[i], json);
+    json = doCall(befores[i], json);
 
   var ret = [];
 
@@ -1018,7 +1010,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   }
 
   for (i in afters)
-    doCall(afters[i], json);
+    ret = doCall(afters[i], ret);
 
   if (wrapped)
     ret = ret[0];
