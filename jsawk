@@ -877,7 +877,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     var type  = args.shift();
     if (args.length > 0) {
       args = args.length > 1 ? args : args[0];
-      var ret  = typeof(args) == "string" ? args : JSON.stringify(args);
+      var ret  = typeof(args) == "string" ? args : json(args);
       doPrint(type, ret);
     }
   };
@@ -923,6 +923,14 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     } catch (e) {
       err("jsawk: script parse error: '"+fun+"'");
       quit(3);
+    }
+  };
+  window.json = function() {
+    try {
+      return JSON.stringify.apply(window, arguments);
+    } catch (e) {
+      err("jsawk: JSON stringify error: "+e);
+      quit(5);
     }
   };
 })(window.print);

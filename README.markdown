@@ -49,28 +49,28 @@ the resource.
 Usage
 =====
 
-**jsawk [**options**] [**script**]**
+      jsawk [OPTIONS] [SCRIPT]
 
 ### OPTIONS
 
-  * **-h** <br />
+  * `-h` <br />
     Print short help page and exit.
-  * **-n** <br />
+  * `-n` <br />
     Suppress printing of JSON result set.
-  * **-d \<delim\>** <br />
+  * `-d \<delim\>` <br />
     Choose a token to indicate end of input. If this token appears on a
     line by itself then reading of JSON input will end. Otherwise, 10 blank
     lines in a row will end input. (Don't look at me, this is a spidermonkey
     issue.) Default delimiter is a single period: `.`.
-  * **-q \<query\>** <br />
+  * `-q \<query\>` <br />
     Filter JSON through the specified 
     [JSONQuery](http://docs.persvr.org/documentation/jsonquery) query.
-  * **-f \<file\>** <br />
+  * `-f \<file\>` <br />
     Load and run the specified JavaScript file prior to
     processing JSON. This option can be specified multiple times to load
     multiple JavaScript libraries.
-  * **-b \<script\>** <br />
-    **-a \<script\>** <br />
+  * `-b \<script\>` <br />
+    `a \<script\>` <br />
     Run the specified snippet of JavaScript before (**-b**) or after (**-a**)
     processing JSON input. The `this` object is set to the whole JSON array
     or object. This is used to preprocess (**-b**) or postprocess (**-a**) the
@@ -257,10 +257,25 @@ over 30 years old.
 This demonstrates how you can remove records from the results array by
 returning a null value from your script.
 
-Count How Many Elements Are In The Input Array
-----------------------------------------------
+Aggregate Functions
+-------------------
 
-This example uses a "before" script, and the `-n` option to disable the
+Before and after scripts can be used to manipulate the JSON working set as
+a whole, somewhat similar to the way aggregate functions like `SUM()` or
+`COUNT()` work in SQL. These types of operations fall under a few basic
+patterns.
+
+  1. Use a before script (`-b` option) to do things to the JSON input before 
+     transformations are done by the main script.
+  2. Use an after script (`-a` option) to do things to the JSON result set
+     after all transformations are completed by the main script.
+
+When doing aggregate operations like this, it is likely that you will want to
+suppress the JSON result set output, and either use the `-n` option
+
+### Count How Many Elements Are In The Input Array
+
+Here's a simple one. This example uses a "before" script, and the `-n` option to disable the
 automatic printing of the result.
 
       cat /tmp/t | jsawk -n -b 'out(this.length)'
