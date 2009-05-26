@@ -126,8 +126,36 @@ functions and properties are available from within a jsawk script:
         window
             The global object.
 
-      JSON
-      ----
+        IS
+            The input set.
+
+        RS
+            The result set.
+
+        $_
+            The current record index (corresponding to the index of the
+            element in the IS array).
+
+        $$
+            The current record object (global variable corresponding to the
+            `this` object in the script scope).
+
+      METHODS
+      -------
+
+        get()
+            Get the next record from the input set. This will prevent jsawk
+            from iterating over that record.
+
+            params: void
+            return: Object|Array|Number|String (the next input record)
+
+        put(record)
+            Push 'record' onto the input set so that jsawk will iterate over
+            it next.
+
+            params: Object|Array|Number|String (the record to push)
+            return: void
 
         json(thing)
             Serialize 'thing' to JSON string.
@@ -135,18 +163,12 @@ functions and properties are available from within a jsawk script:
             params: Object|Array|Number|String thing (what to serialize)
             return: String (the resulting JSON string)
 
-      JSONQUERY
-      ---------
-
-        $(query, thing)
+        Q(query, thing)
             Runs the JSONQuery 'query' on the JSON input 'thing'.
 
             params: String query (the JSONQuery)
                     Array|Object thing (the JSON input)
             return: Array|Object (result of running the query)
-
-      INPUT/OUTPUT
-      ------------
 
         err(thing)
             Print arguments (JSON encoded, if necessary) to stderr.

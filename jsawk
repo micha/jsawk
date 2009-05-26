@@ -17,7 +17,12 @@ TMP=`mktemp`
 trap "rm -f $TMP" SIGINT SIGTERM SIGHUP SIGQUIT
 
 cat <<'__END__' > $TMP
-window    = this;
+
+window    = this;     // the global object
+window.IS = [];       // the input set
+window.RS = [];       // the result set
+window.$_ = {};       // the current element index
+window.$$ = {};       // the current element
 
 (function() {
 
@@ -881,7 +886,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       doPrint(type, ret);
     }
   };
-  window.$ = function() {
+  window.Q = function() {
     try {
       var ret = JSONQuery.apply(window, arguments);
       ret.length;
@@ -951,6 +956,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var end = ".";
   var befores = [];
   var afters  = [];
+  var i,j,k,l,m,n;
 
   var arg;
 
@@ -1006,34 +1012,43 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   }  
   input = input.substring(0, input.length-blankcount);  
 
-  var json    = doJson(input);
-  var wrapped = !(json instanceof Array);
+  var wrapped;
+
+  IS      = doJson(input);
+  wrapped = !(IS instanceof Array);
 
   if (wrapped)
-    json = [ json ];
+    IS = [ IS ];
 
   var f = makeFilter(fun);
 
-  json = $(pat, json);
+  IS = Q(pat, IS);
+
+  $_ = -1;
+  $$ = IS;
 
   for (i in befores)
-    json = doCall(befores[i], json);
+    IS = doCall(befores[i], IS);
 
-  var ret = [];
+  RS = [];
 
-  for (var i=0; i<json.length; i++) {
-    var tmp = doCall(f, json[i]);
-    if (tmp != null) ret.push(tmp);
+  for ($_=0; $_<IS.length; $_++) {
+    $$ = IS[$_]
+    var tmp = doCall(f, $$);
+    if (tmp != null) RS.push(tmp);
   }
 
+  $_ = -1;
+  $$ = RS;
+
   for (i in afters)
-    ret = doCall(afters[i], ret);
+    RS = doCall(afters[i], RS);
 
   if (wrapped)
-    ret = ret[0];
+    RS = RS.pop();
 
   if (!noprint)
-    out(ret);
+    out(RS);
 })(arguments);
 __END__
 
