@@ -211,14 +211,16 @@ produces any output. Also, notice how `this` was set to the input array.
 
 ### Get A List Of All Sports ###
 
-This one uses JSONQuery to drill down into the JSON objects, and "after"
-script to collate the results, and everything is piped to the Unix `uniq`
-tool to remove duplicate entries.
+This one generates a list of all the sports that are played by the people
+in our little JSON list, one per line, unique entries only.
 
       cat /tmp/t | ./jsawk -n -q '..sports' -a 'out(this.join("\n"))' \
                       'return this.join("\n")' |uniq
 
-This is starting to show the power of the awk-like behavior.
+Notice the use of JSONQuery to drill down into the JSON objects, an "after"
+script to collate the results, and everything piped to the Unix `uniq`
+tool to remove duplicate entries.  This is starting to show the power of 
+the awk-like behavior.
 
 JSON Pretty-Printing
 ====================
