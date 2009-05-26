@@ -213,7 +213,8 @@ Jsawk supports JSONQuery with the `-q` option. You can do almost anything
 with JSONQuery that you can do with jsawk scripts, to include selecting
 records, drilling down into records, mapping input sets to output sets as
 a sort of filter, modifying the JSON, sorting, whathaveyou. JSONQuery is
-to JSONPath is to JSON, as XQuery is to XPath is to XML.
+to JSONPath is to JSON, as XQuery is to XPath is to XML. Here are some
+JSONQuery resources to get started with this powerful tool:
 
   * [The persevere JSONQuery documentation](http://docs.persvr.org/documentation/jsonquery)
   * [Kris Zyp's intro to JSONQuery in dojo](http://www.sitepen.com/blog/2008/07/16/jsonquery-data-querying-beyond-jsonpath/)
