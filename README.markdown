@@ -199,6 +199,16 @@ sports, separated by commas, for example.
 Notice how altering the `this` object in place alters the result array
 accordingly.
 
+### Count How Many Elements Are In The Input Array ###
+
+This example uses a "before" script, and the `-n` option to disable the
+automatic printing of the result.
+
+      cat /tmp/t | jsawk -n -b 'out(this.length)'
+
+Since regular result output is disabled, only the `out(this.length)` call
+produces any output. Also, notice how `this` was set to the input array.
+
 JSON Pretty-Printing
 ====================
 
