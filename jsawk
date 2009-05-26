@@ -938,6 +938,12 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       quit(5);
     }
   };
+  window.get = function() {
+    return $$ = IS[++$_];
+  };
+  window.put = function(record) {
+    IS = IS.slice(0, $_+1).concat([record]).concat(IS.slice($_+1));
+  };
 })(window.print);
 
 (function(argv) {
