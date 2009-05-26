@@ -105,6 +105,10 @@ printed as JSON to stdout.
 Jsawk JavaScript Environment
 ----------------------------
 
+Jsawk uses the Spidermonkey JavaScript interpreter, so you have access to all
+of the Spidermonkey functions and whatnot. Additionally, the following
+functions and properties are available from within a jsawk script:
+
 ### Properties ###
 
   * **window** <br />
