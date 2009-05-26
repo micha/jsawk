@@ -1,13 +1,10 @@
-Introduction
-============
+Quick Start
+===========
 
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 provided as a string on stdin, and filter them using JavaScript, producing 
 a results array that is printed to stdout. You can use this to manipulate
 data from a REST JSON web service, for example, from a shell script.
-
-Quick Start
-===========
 
 You need to have the `js` interpreter installed. On a Debian system you can
 install it with the command `apt-get install spidermonkey-bin`. Or you can 
