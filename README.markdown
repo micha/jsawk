@@ -127,7 +127,7 @@ functions and properties are available from within a jsawk script:
 
 ### JSON
 
-  * **JSON.stringify(**_thing_**)** <br />
+  * **json(**_thing_**)** <br />
     Serialize _thing_ to JSON string. <br />
     **param:** _thing_ Object or Array. <br />
     **return:** String JSON result.
@@ -166,11 +166,14 @@ Exit Status
 On successful completion jsawk returns an exit status of `0`. If an error
 ocurred and execution was aborted, a non-zero exit status will be returned.
 
+### Exit Status
+
   * **0** Successful completion.
   * **1** Command line parsing error.
-  * **2** Error parsing input JSON string.
-  * **3** Error running script.
-  * **4** Error parsing or executing JSON query.
+  * **2** JSON parsing error.
+  * **3** Script error.
+  * **4** JSONQuery parsing error.
+  * **5** JSON stringify error.
 
 Examples
 ========
