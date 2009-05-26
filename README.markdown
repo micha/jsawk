@@ -105,7 +105,7 @@ Jsawk JavaScript Environment
 ### JSON ###
 
   * **JSON.stringify(**_thing_**)** <br />
-    Produces JSON string from the _thing_.
+    Produces JSON string from the _thing_. <br />
     **param:** _thing_ Object or Array. <br />
     **return:** The JSON string.
 
