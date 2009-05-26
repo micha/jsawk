@@ -73,7 +73,8 @@ Usage
     **-a \<script\>** <br />
     Run the specified snippet of JavaScript before (**-b**) or after (**-a**)
     processing JSON input. The `this` object is set to the whole JSON array
-    or object.
+    or object. This is used to preprocess (**-b**) or postprocess (**-a**) the
+    JSON array before or after the main script is applied.
 
 ### SCRIPT ###
 
