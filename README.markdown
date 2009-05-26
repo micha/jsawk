@@ -74,7 +74,7 @@ Scripting Environment
 
   * **err(**_thing_**)** <br />
     Print arguments (JSON encoded, if necessary) to stderr. <br />
-    **thing:** Object, Array, or String.
+    **params:** _thing_ Object, Array, or String. <br />
     **return:** void.
   * **out(**_Object|Array|String_**)** <br />
     Print arguments (JSON encoded, if necessary) to stdout.
