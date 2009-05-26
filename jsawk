@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+#
+# Jsawk: It's like awk for JSON, in bash.
+#
+# Fork me on github:
+#   http://github.com/micha/jsawk
+#
+# Author:
+#   Micha Niskin <micha@thinkminimo.com>
+#   Copyright 2009, no rights reserved, other than as required by the
+#   licenses of the incorporated software below.
+#
+
 TMP=`mktemp`
 
 trap "rm -f $TMP" SIGINT SIGTERM
