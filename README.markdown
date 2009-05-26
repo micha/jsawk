@@ -75,9 +75,9 @@ Scripting Environment
 ### JSONQuery ###
 
   * **$(**_query_**, **_thing_**)** <br />
-    Print arguments (JSON encoded, if necessary) to stderr. <br />
-    **params:** _thing_ Object, Array, or String. <br />
-    **return:** void.
+    Runs the _query_ on the _thing_.
+    **params:** _thing_ Object or Array. <br />
+    **return:** Result of running the query.
 
 ### Input/Output ###
 
