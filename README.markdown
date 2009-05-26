@@ -168,18 +168,36 @@ following contents:
           "last"    : "halevi",
           "from"    : "israel",
           "age"     : 26,
-          "sports"  : [ "soccer", "windsurfing", "snooker" ]
+          "sports"  : [ "soccer", "windsurfing" ]
         },
         {
           "first"   : "cory",
           "last"    : "parker",
           "from"    : "united states",
           "age"     : 31,
-          "sports"  : [ "surfing", "baseball", "pool" ]
+          "sports"  : [ "windsurfing", "baseball", "extreeeeme kayaking" ]
         }
       ]
 
 This is going to be the input JSON text we will use in the examples.
+
+### The Identity Mapping ###
+
+This doesn't really do anything:
+
+      cat /tmp/t | jsawk
+
+You should get the input back out, unmolested.
+
+### Flatten The "Sports" Array Of Each Element ###
+
+Replace the "sports" array with a simple string containing the different
+sports, separated by commas, for example.
+
+      cat /tmp/t | jsawk 'this.sports = this.sports.join(",")'
+
+Notice how altering the `this` object in place alters the result array
+accordingly.
 
 JSON Pretty-Printing
 ====================
