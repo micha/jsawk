@@ -293,13 +293,21 @@ suppress the JSON result set output, and either use the `-n` option
 
 ### Count How Many Elements Are In The Input Array
 
-Here's a simple one. This example uses a "before" script, and the `-n` option to disable the
-automatic printing of the result.
+Here's a simple one. This example uses a before script, and the `-n`
+option to disable the automatic printing of the result.
 
       cat /tmp/t | jsawk -n -b 'out(this.length)'
 
 Since regular result output is disabled, only the `out(this.length)` call
 produces any output. Also, notice how `this` was set to the input array.
+
+Another way to accomplish the same task would be to use an after script to
+modify the result set, like this:
+
+      cat /tmp/t | jsawk -a 'return this.length'
+
+Notice how the entire results array is replaced by the single number and
+printed to stdout.
 
 Get A List Of All Sports
 ------------------------
