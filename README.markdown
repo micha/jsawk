@@ -234,7 +234,7 @@ Looks like it's everyone's birthday today.
 
       cat /tmp/t | jsawk 'this.age++'
 
-Notice how there is no need to write `return this` in the script. That is
+Notice that there is no need to write `return this` in the script. That is
 assumed, and the runtime does it for you automatically if you don't explicitly
 call `return` yourself.
 
