@@ -120,7 +120,7 @@ Jsawk uses the Spidermonkey JavaScript interpreter, so you have access to all
 of the Spidermonkey functions and whatnot. Additionally, the following
 functions and properties are available from within a jsawk script:
 
-      Properties
+      PROPERTIES
       ----------
 
         window
@@ -135,7 +135,7 @@ functions and properties are available from within a jsawk script:
             params: Object|Array|Number|String thing (what to serialize)
             return: String (the resulting JSON string)
 
-      JSONQuery
+      JSONQUERY
       ---------
 
         $(query, thing)
@@ -145,7 +145,7 @@ functions and properties are available from within a jsawk script:
                     Array|Object thing (the JSON input)
             return: Array|Object (result of running the query)
 
-      Input/Output
+      INPUT/OUTPUT
       ------------
 
         err(thing)
