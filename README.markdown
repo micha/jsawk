@@ -120,36 +120,45 @@ Jsawk uses the Spidermonkey JavaScript interpreter, so you have access to all
 of the Spidermonkey functions and whatnot. Additionally, the following
 functions and properties are available from within a jsawk script:
 
-### Properties
+      Properties
+      ----------
 
-  * **window** <br />
-    The global object.
+        window
+            The global object.
 
-### JSON
+      JSON
+      ----
 
-  * **json(**_thing_**)** <br />
-    Serialize _thing_ to JSON string. <br />
-    **param:** _thing_ Object or Array. <br />
-    **return:** String JSON result.
+        json(thing)
+            Serialize 'thing' to JSON string.
 
-### JSONQuery
+            params: Object|Array thing (what to serialize)
+            return: String (the resulting JSON string)
 
-  * **$(**_query_**, **_thing_**)** <br />
-    Runs the JSONQuery _query_ on the JSON _thing_. <br />
-    **param:** _query_ String JSONQuery query. <br />
-    **param:** _thing_ Array input. <br />
-    **return:** Array result of running the query.
+      JSONQuery
+      ---------
 
-### Input/Output
+        $(query, thing)
+            Runs the JSONQuery 'query' on the JSON input 'thing'.
 
-  * **err(**_thing_**)** <br />
-    Print arguments (JSON encoded, if necessary) to stderr. <br />
-    **param:** _thing_ Object, Array, or String. <br />
-    **return:** void.
-  * **out(**_thing_**)** <br />
-    Print arguments (JSON encoded, if necessary) to stdout. <br />
-    **param:** _thing_ Object, Array, or String. <br />
-    **return:** void.
+            params: String query (the JSONQuery)
+                    Array|Object thing (the JSON input)
+            return: Array|Object (result of running the query)
+
+      Input/Output
+      ------------
+
+        err(thing)
+            Print arguments (JSON encoded, if necessary) to stderr.
+
+            params: Object|Array|String thing (what to encode)
+            return: void
+
+        out(thing)
+            Print arguments (JSON encoded, if necessary) to stdout.
+
+            params: Object|Array|String thing (what to encode)
+            return: void
 
 Errors and Output
 -----------------
