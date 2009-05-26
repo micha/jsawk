@@ -214,7 +214,7 @@ produces any output. Also, notice how `this` was set to the input array.
 This one generates a list of all the sports that are played by the people
 in our little JSON list, one per line, unique entries only.
 
-      cat /tmp/t | ./jsawk -n -q '..sports' -a 'out(this.join("\n"))' \
+      cat /tmp/t | jsawk -n -q '..sports' -a 'out(this.join("\n"))' \
                       'return this.join("\n")' |uniq
 
 Notice the use of JSONQuery to drill down into the JSON objects, an "after"
