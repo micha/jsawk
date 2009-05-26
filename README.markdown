@@ -4,7 +4,7 @@ Quick Start
 You need to have the `js` interpreter installed. On a Debian system you can
 install it with the command `apt-get install spidermonkey-bin`. Or you can 
 build it from source from [here](http://www.mozilla.org/js/spidermonkey/).
-Okay? Okay. Ready to go.
+Ready? Go.
 
 Install It
 ----------
