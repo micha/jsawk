@@ -14,7 +14,7 @@
 
 TMP=`mktemp`
 
-trap "rm -f $TMP" SIGINT SIGTERM
+trap "rm -f $TMP" SIGINT SIGTERM SIGHUP SIGQUIT
 
 cat <<'__END__' > $TMP
 window    = this;
