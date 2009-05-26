@@ -303,11 +303,10 @@ printed to stdout.
 JSON-to-Text Transformations
 ----------------------------
 
-The `-n` option suppresses the automatic printing of the result set. This is
-useful when JSON output is not desired. In the following examples we will be
-manipulating the JSON input to produce text output, useful in cases where you
-will be extracting information from a JSON data source and piping it to non
-JSON accepting processes elsewhere.
+In the following examples we will be manipulating the JSON input to
+produce text output instead of JSON, for cases where you will be extracting
+information from a JSON data source and piping it to non JSON-accepting
+processes elsewhere.
 
 ### Get A List Of All Sports
 
