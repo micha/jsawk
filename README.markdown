@@ -198,6 +198,17 @@ following contents:
 
 This is going to be the input JSON text we will use in the examples.
 
+Transformations
+---------------
+
+These examples transform the input JSON, modifying it and returning the
+modified JSON as output on stdout to be piped elsewhere. Transformations
+generally are done with a script that follows one of these simple patterns:
+
+  # Modify the `this` object in place (no `return` statement necessary).
+  # Create a replacement object for each record, and `return` it at the end
+    of each iteration.
+
 The Identity Mapping
 --------------------
 
