@@ -72,14 +72,23 @@ The `this` object is set to the current array element or object.
 Scripting Environment
 =====================
 
+### JSONQuery ###
+
+  * **$(**_query_**, **_thing_**)** <br />
+    Print arguments (JSON encoded, if necessary) to stderr. <br />
+    **params:** _thing_ Object, Array, or String. <br />
+    **return:** void.
+
+### Input/Output ###
+
   * **err(**_thing_**)** <br />
     Print arguments (JSON encoded, if necessary) to stderr. <br />
     **params:** _thing_ Object, Array, or String. <br />
     **return:** void.
-  * **out(**_Object|Array|String_**)** <br />
-    Print arguments (JSON encoded, if necessary) to stdout.
-  * **$(**_query_**, **_array_**)** <br />
-    The JSONQuery object.
+  * **out(**_thing_**)** <br />
+    Print arguments (JSON encoded, if necessary) to stdout. <br />
+    **params:** _thing_ Object, Array, or String. <br />
+    **return:** void.
 
 Errors and Output
 =================
