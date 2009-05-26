@@ -132,7 +132,7 @@ functions and properties are available from within a jsawk script:
         json(thing)
             Serialize 'thing' to JSON string.
 
-            params: Object|Array thing (what to serialize)
+            params: Object|Array|Number|String thing (what to serialize)
             return: String (the resulting JSON string)
 
       JSONQuery
@@ -151,13 +151,13 @@ functions and properties are available from within a jsawk script:
         err(thing)
             Print arguments (JSON encoded, if necessary) to stderr.
 
-            params: Object|Array|String thing (what to encode)
+            params: Object|Array|Number|String thing (what to encode)
             return: void
 
         out(thing)
             Print arguments (JSON encoded, if necessary) to stdout.
 
-            params: Object|Array|String thing (what to encode)
+            params: Object|Array|Number|String thing (what to encode)
             return: void
 
 Errors and Output
