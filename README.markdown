@@ -154,7 +154,7 @@ functions and properties are available from within a jsawk script:
             Push 'record' onto the input set so that jsawk will iterate over
             it next.
 
-            params: Object|Array|Number|String (the record to push)
+            params: Object|Array|Number|String record (the record to push)
             return: void
 
         json(thing)
