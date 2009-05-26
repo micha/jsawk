@@ -198,12 +198,13 @@ following contents:
 
 This is going to be the input JSON text we will use in the examples.
 
-Transformations
----------------
+JSON-to-JSON Transformations
+----------------------------
 
 These examples transform the input JSON, modifying it and returning the
-modified JSON as output on stdout to be piped elsewhere. Transformations
-generally are done with a script that follows one of these simple patterns:
+modified JSON as output on stdout to be piped elsewhere. Transformations of
+this type are generally done with a script that follows one of these simple 
+patterns:
 
   1. Modify the `this` object in place (no `return` statement necessary).
   1. Create a replacement object for each record, and `return` it at the end
@@ -237,12 +238,24 @@ call `return` yourself.
 
 Here we modify the input by replacing the `sports` property of each object
 in the input array (the `sports` property is itself an array of strings) with
-a single string containing all the person's sports separated by commas.
+a single string containing all of the person's sports, separated by commas.
 
       cat /tmp/t | jsawk 'this.sports = this.sports.join(",")'
 
 Notice how altering the `this` object in place alters the result array
 accordingly.
+
+### JSON Grep: Select Certain Elements From Input ###
+
+Sometimes you want to use awk to select certain records from the input set,
+leaving the rest unchanged. This is like the `grep` pattern of operation. In 
+this example we will extract all the records corresponding to people who are 
+over 30 years old.
+
+      cat /tmp/t | jsawk 'if (this.age <= 30) return null'
+
+This demonstrates how you can remove records from the results array by
+returning a null value from your script.
 
 Count How Many Elements Are In The Input Array
 ----------------------------------------------
