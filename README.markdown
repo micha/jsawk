@@ -209,8 +209,10 @@ generally are done with a script that follows one of these simple patterns:
   1. Create a replacement object for each record, and `return` it at the end
      of each iteration.
 
-The Identity Mapping
---------------------
+These patterns leave the records in JSON format, and they are automatically
+printed to stdout without the use of the `out()` function.
+
+### The Identity Mapping ###
 
 This doesn't really do anything:
 
