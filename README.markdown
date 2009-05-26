@@ -105,17 +105,17 @@ Jsawk JavaScript Environment
 ### JSON ###
 
   * **JSON.stringify(**_thing_**)** <br />
-    Produces JSON string from the _thing_. <br />
+    Serialize _thing_ to JSON string. <br />
     **param:** _thing_ Object or Array. <br />
-    **return:** The JSON string.
+    **return:** String JSON result.
 
 ### JSONQuery ###
 
   * **$(**_query_**, **_thing_**)** <br />
     Runs the JSONQuery _query_ on the JSON _thing_.
     **param:** _query_ String JSONQuery query. <br />
-    **param:** _thing_ Object or Array. <br />
-    **return:** Result of running the query.
+    **param:** _thing_ Array input. <br />
+    **return:** Array result of running the query.
 
 ### Input/Output ###
 
@@ -130,6 +130,12 @@ Jsawk JavaScript Environment
 
 Errors and Output
 =================
+
+Errors in parsing scripts, JSON queries, or JSON input, and errors executing
+scripts will all result in the appropriate error message on stderr, and
+immediate exit with a non-zero exit status. Normal output is written to
+stdout, unless the `-n` option is specified. In that case only output from
+the `out()` or `err()` functions and error messages will appear.
 
 Exit Status
 ===========
