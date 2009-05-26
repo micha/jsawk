@@ -215,8 +215,6 @@ records, drilling down into records, mapping input sets to output sets as
 a sort of filter, modifying the JSON, sorting, whathaveyou. JSONQuery is
 to JSONPath is to JSON, as XQuery is to XPath is to XML.
 
-### Some JSONQuery Resources
-
   * [The persevere JSONQuery documentation](http://docs.persvr.org/documentation/jsonquery)
   * [Kris Zyp's intro to JSONQuery in dojo](http://www.sitepen.com/blog/2008/07/16/jsonquery-data-querying-beyond-jsonpath/)
 
