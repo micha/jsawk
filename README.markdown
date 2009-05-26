@@ -79,13 +79,20 @@ with JavaScript objects and arrays of objects.
 In awk, a text file is split into an array of "records", each of which being
 an array of "fields". The awk script that is specified on the command line is
 run once for each record in the array, with the `$1`, `$2`, etc. variables
-set to the various fields in the record.
+set to the various fields in the record. The awk script can set variables,
+perform calculations, do various text-munging things, and print output. This
+printing capablity makes awk into a filter, taking text input, transforming
+it record by record, printing out the resulting modified records at the end.
 
 Jsawk is similar, but in jsawk records are elements of the JSON input array
 (if the input was a single object then there is a single record consisting
 of that object). The jsawk script is run once for each record object, with
 the `this` object set to the current record. So here the properties of the
-record object are equivalent to the `$1`, `$2`, etc. in awk.
+record object are equivalent to the `$1`, `$2`, etc. in awk. The jsawk
+script can then modify the record, perform calculations, do things. However,
+instead of printing the modified record, the modified record is `return`ed.
+At then end, if the `-n` option was not specified, the resulting array is
+printed as JSON to stdout.
 
 ### JSONQuery ###
 
