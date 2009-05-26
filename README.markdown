@@ -1,3 +1,11 @@
+Introduction
+============
+
+Jsawk is like awk, but for JSON. You work with an array of JSON objects
+provided as a string on stdin, and filter them using JavaScript, producing 
+a results array that is printed to stdout. You can use this to manipulate
+data from a REST JSON web service, for example, from a shell script.
+
 Quick Start
 ===========
 
