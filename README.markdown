@@ -367,7 +367,7 @@ Sometimes you want to just check for a certain condition in a shell script.
 Suppose you want to know if there are any people over the age of 50 in the
 JSON input array, like this:
 
-      jsawk -n 'if (this.age > 50) quit(1)' < /tmp/t || echo "We have people over 50 here, naptime is in effect."
+      jsawk -n 'if (this.age > 50) quit(1)' < /tmp/t || echo "We have people over 50 here---naptime in effect."
 
 We suppress normal result set output with `-n` and use the `quit()` function
 to return a value in the exit status. The default exit status is, of course,
