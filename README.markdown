@@ -140,6 +140,20 @@ the `out()` or `err()` functions and error messages will appear.
 Exit Status
 ===========
 
+On successful completion jsawk returns an exit status of `0`. If an error
+ocurred and execution was aborted, a non-zero exit status will be returned.
+
+  * **0** <br />
+    Successful completion.
+  * **1** <br />
+    Command line parsing error.
+  * **2** <br />
+    Error parsing input JSON string.
+  * **3** <br />
+    Error running script.
+  * **4** <br />
+    Error parsing or executing JSON query.
+
 JSON Pretty-Printing
 ====================
 
