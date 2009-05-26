@@ -4,15 +4,22 @@ Quick Start
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 read from stdin, filter them using JavaScript to produce a results array
 that is printed to stdout. You can use this as a filter to manipulate data
-from a REST JSON web service, for example, in a shell script.
+from a REST JSON web service, for example, in a shell script. Also, you can
+suppress JSON output and use the built-in printing functions to translate
+your JSON input to other formats and send that to stdout, to be piped to
+other processes. You can load JavaScript libraries on the command line to
+increase your processing power, and other things.
+
+Setup
+-----
 
 You need to have the `js` interpreter installed. On a Debian system you can
 install it with the command `apt-get install spidermonkey-bin`. Or you can 
 build it from source from [here](http://www.mozilla.org/js/spidermonkey/).
 Ready? Go.
 
-Install It
-----------
+Install
+-------
 
 First, get the jsawk script:
 
@@ -22,8 +29,8 @@ Then make it executable and put it somewhere in your path:
 
       chmod 755 jsawk && mv jsawk ~/bin/
 
-Use It
-------
+Use
+---
 
 Now you can do some stuff with JSON data. Here's an example using data from
 a REST service that serves JSON (we use [resty](http://github.com/micha/resty)
