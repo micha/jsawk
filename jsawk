@@ -6,9 +6,6 @@ trap "rm -f $TMP" SIGINT SIGTERM
 
 cat <<'__END__' > $TMP
 window    = this;
-window.$_ = null;
-window.$$ = [];
-window.wrapped = false;
 
 (function() {
 

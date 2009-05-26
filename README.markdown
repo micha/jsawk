@@ -94,22 +94,38 @@ instead of printing the modified record, the modified record is `return`ed.
 At then end, if the `-n` option was not specified, the resulting array is
 printed as JSON to stdout.
 
+Jsawk JavaScript Environment
+----------------------------
+
+### Properties ###
+
+  * **window** <br />
+    The global object.
+
+### JSON ###
+
+  * **JSON.stringify(**_thing_**)** <br />
+    Produces JSON string from the _thing_.
+    **param:** _thing_ Object or Array. <br />
+    **return:** The JSON string.
+
 ### JSONQuery ###
 
   * **$(**_query_**, **_thing_**)** <br />
-    Runs the _query_ on the _thing_.
-    **params:** _thing_ Object or Array. <br />
+    Runs the JSONQuery _query_ on the JSON _thing_.
+    **param:** _query_ String JSONQuery query. <br />
+    **param:** _thing_ Object or Array. <br />
     **return:** Result of running the query.
 
 ### Input/Output ###
 
   * **err(**_thing_**)** <br />
     Print arguments (JSON encoded, if necessary) to stderr. <br />
-    **params:** _thing_ Object, Array, or String. <br />
+    **param:** _thing_ Object, Array, or String. <br />
     **return:** void.
   * **out(**_thing_**)** <br />
     Print arguments (JSON encoded, if necessary) to stdout. <br />
-    **params:** _thing_ Object, Array, or String. <br />
+    **param:** _thing_ Object, Array, or String. <br />
     **return:** void.
 
 Errors and Output
