@@ -209,6 +209,17 @@ automatic printing of the result.
 Since regular result output is disabled, only the `out(this.length)` call
 produces any output. Also, notice how `this` was set to the input array.
 
+### Get A List Of All Sports ###
+
+This one uses JSONQuery to drill down into the JSON objects, and "after"
+script to collate the results, and everything is piped to the Unix `uniq`
+tool to remove duplicate entries.
+
+      cat /tmp/t | ./jsawk -n -q '..sports' -a 'out(this.join("\n"))' \
+                      'return this.join("\n")' |uniq
+
+This is starting to show the power of the awk-like behavior.
+
 JSON Pretty-Printing
 ====================
 
