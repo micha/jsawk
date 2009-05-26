@@ -14,8 +14,11 @@ Setup
 -----
 
 You need to have the `js` interpreter installed. On a Debian system you can
-install it with the command `apt-get install spidermonkey-bin`. Or you can 
-[build it from source](http://www.mozilla.org/js/spidermonkey/).
+install it with the following command: 
+
+      apt-get install spidermonkey-bin
+      
+Or you can [build it from source](http://www.mozilla.org/js/spidermonkey/).
 Ready? Go.
 
 Install
