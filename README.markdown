@@ -149,6 +149,38 @@ ocurred and execution was aborted, a non-zero exit status will be returned.
   * **3** Error running script.
   * **4** Error parsing or executing JSON query.
 
+Examples
+========
+
+For the following examples, suppose there is a file `/tmp/t`, with the
+following contents:
+
+      [
+        {
+          "first"   : "trevor",
+          "last"    : "wellington",
+          "from"    : "england",
+          "age"     : 52,
+          "sports"  : [ "rugby", "badmitton", "snooker" ]
+        },
+        {
+          "first"   : "yoni",
+          "last"    : "halevi",
+          "from"    : "israel",
+          "age"     : 26,
+          "sports"  : [ "soccer", "windsurfing", "snooker" ]
+        },
+        {
+          "first"   : "cory",
+          "last"    : "parker",
+          "from"    : "united states",
+          "age"     : 31,
+          "sports"  : [ "surfing", "baseball", "pool" ]
+        }
+      ]
+
+This is going to be the input JSON text we will use in the examples.
+
 JSON Pretty-Printing
 ====================
 
