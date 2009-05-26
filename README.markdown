@@ -293,36 +293,48 @@ suppress the JSON result set output, and either use the `-n` option
 
 ### Count How Many Elements Are In The Input Array
 
-Here's a simple one. This example uses a before script, and the `-n`
-option to disable the automatic printing of the result.
-
-      cat /tmp/t | jsawk -n -b 'out(this.length)'
-
-Since regular result output is disabled, only the `out(this.length)` call
-produces any output. Also, notice how `this` was set to the input array.
-
-Another way to accomplish the same task would be to use an after script to
-modify the result set, like this:
+Here we use an after script to modify the result set, like this:
 
       cat /tmp/t | jsawk -a 'return this.length'
 
 Notice how the entire results array is replaced by the single number and
 printed to stdout.
 
-Get A List Of All Sports
-------------------------
+JSON-to-Text Transformations
+----------------------------
+
+The `-n` option suppresses the automatic printing of the result set. This is
+useful when JSON output is not desired. In the following examples we will be
+manipulating the JSON input to produce text output, useful in cases where you
+will be extracting information from a JSON data source and piping it to non
+JSON accepting processes elsewhere.
+
+### Get A List Of All Sports
 
 This one generates a list of all the sports that are played by the people
-in our little JSON list, one per line, unique entries only.
+in our little JSON list, one per line, without duplicate entries, sorted
+alphabetically.
 
       cat /tmp/t \
-        | jsawk -n -q '..sports' -a 'out(this.join("\n"))' 'return this.join("\n")' \
-        | uniq
+        | jsawk -a 'return this.join("\n")' 'return this.sports.join("\n")' \
+        | sort -u
 
 Notice the use of JSONQuery to drill down into the JSON objects, an "after"
-script to collate the results, and everything piped to the Unix `uniq`
-tool to remove duplicate entries.  This is starting to show the power of 
-the awk-like behavior.
+script to collate the results, and everything piped to the Unix `sort`
+tool to remove duplicate entries and do the lexical ordering.  This is 
+starting to show the power of the awk-like behavior now.
+
+### Return a Boolean Value
+
+Sometimes you want to just check for a certain condition in a shell script.
+Suppose you want to know if there are any people over the age of 50 in the
+JSON input array, like this:
+
+      jsawk -n 'if (this.age > 50) quit(1)' < /tmp/t || echo "We have people over 50 here, naptime is in effect."
+
+We suppress normal result set output with `-n` and use the `quit()` function
+to return a value in the exit status. The default exit status is, of course,
+zero for success.
 
 JSON Pretty-Printing
 ====================
