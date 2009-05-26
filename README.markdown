@@ -227,6 +227,17 @@ script to collate the results, and everything piped to the Unix `uniq`
 tool to remove duplicate entries.  This is starting to show the power of 
 the awk-like behavior.
 
+Increment Everyone's Age
+------------------------
+
+Looks like it's everyone's birthday today.
+
+      cat /tmp/t | jsawk 'this.age++'
+
+Notice how there is no need to write `return this` in the script. That is
+assumed, and the runtime does it for you automatically if you don't explicitly
+call `return` yourself.
+
 JSON Pretty-Printing
 ====================
 
