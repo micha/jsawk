@@ -184,7 +184,7 @@ You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2
     for(var i=0,l=array.length; i<l; ++i){
       var value = array[i];
       if(callback(value, i, array)){
-        if((typeof value == 'object') && value){
+        if((typeof value == 'object') && value) {
           // with objects we prevent duplicates with a marker property
           if(!value.__included){
             value.__included = true;
@@ -205,6 +205,9 @@ You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2
     }
     return outArr;
   }
+  window.uniq = function(array) {
+    return distinctFilter(array, function() { return true; });
+  };
   var JSONQuery = function(/*String*/query,/*Object?*/obj){
     // summary:
     //     Performs a JSONQuery on the provided object and returns the results.
@@ -995,7 +998,6 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         afters.push(makeFilter(argv.shift()));
         break;
       default:
-        if (argv.length > 0) usage();
         fun = arg;
     }
   }

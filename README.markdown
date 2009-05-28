@@ -166,6 +166,12 @@ functions and properties are available from within a jsawk script:
             params: Object|Array|Number|String thing (what to serialize)
             return: String (the resulting JSON string)
 
+        uniq(array)
+            Return array of distinct elements.
+
+            params: Array array (the input array)
+            return: Array (the resulting array of distinct elements)
+
         Q(query, thing)
             Runs the JSONQuery 'query' on the JSON input 'thing'.
 
