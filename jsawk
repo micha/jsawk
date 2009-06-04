@@ -184,15 +184,9 @@ You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2
     for(var i=0,l=array.length; i<l; ++i){
       var value = array[i];
       if(callback(value, i, array)){
-        if((typeof value == 'object') && value) {
-          // with objects we prevent duplicates with a marker property
-          if(!value.__included){
-            value.__included = true;
-            outArr.push(value);
-          }
-        }else if(!primitives[value + typeof value]){
+        if(!primitives[JSON.stringify(value)]){
           // with primitives we prevent duplicates by putting it in a map
-          primitives[value + typeof value] = true;
+          primitives[JSON.stringify(value)] = true;
           outArr.push(value);
         }
       }
@@ -909,6 +903,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     args.unshift("ERR:");
     doJsonPrint.apply(window, args);
   };
+  window.alert = p;
   window.doJson = function(input) {
     try {
       return eval("("+input+")");
@@ -959,12 +954,12 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     quit(1);
   };
 
-  var pat = "[*]";
   var fun = "";
   var noprint = false;
   var end = ".";
   var befores = [];
   var afters  = [];
+  var queries = [];
   var i,j,k,l,m,n;
 
   var arg;
@@ -983,7 +978,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         break;
       case "-q":
         if (argv.length < 1) usage();
-        pat = argv.shift();
+        queries.push(argv.shift());
         break;
       case "-f":
         if (argv.length < 1) usage();
@@ -1030,7 +1025,8 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
   var f = makeFilter(fun);
 
-  IS = Q(pat, IS);
+  for (i in queries)
+    IS = Q(queries[i], IS);
 
   $_ = -1;
   $$ = IS;

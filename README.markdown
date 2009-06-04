@@ -70,7 +70,9 @@ Usage
           is a spidermonkey issue.) Default delimiter is a single period.
 
       -q <query>
-          Filter JSON through the specified JSONQuery query.
+          Filter JSON through the specified JSONQuery query. If multiple
+          '-q' options are specified then each query will be performed in
+          turn, in the order in which they appeared on the command line.
 
       -f <file>
           Load and run the specified JavaScript file prior to processing
@@ -82,6 +84,9 @@ Usage
           processing JSON input. The `this` object is set to the whole JSON
           array or object. This is used to preprocess (-b) or postprocess
           (-a) the JSON array before or after the main script is applied.
+          This option can be specified multiple times to define multiple
+          before/after scripts, which will be applied in the order they
+          appeared on the command line.
 
       SCRIPT
       ------
