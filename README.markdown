@@ -359,7 +359,8 @@ all duplicate elements removed.
 Note the use of `return null` to prevent jsawk from adding the `this`
 object to the result set automatically. Instead we manipulated the result
 set explicitly, enabling each iteration to add more that one element to
-it---the entire `sports` array.
+it---the entire `sports` array. Also, notice the use of an after script
+to sort the result set and remove duplicates.
 
 JSON-to-Text Transformations
 ----------------------------
