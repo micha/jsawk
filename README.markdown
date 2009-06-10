@@ -337,9 +337,6 @@ patterns.
   2. Use an after script (`-a` option) to do things to the JSON result set
      after all transformations are completed by the main script.
 
-When doing aggregate operations like this, it is likely that you will want to
-suppress the JSON result set output, and either use the `-n` option
-
 ### Count How Many Elements Are In The Input Array
 
 Here we use an after script to modify the result set, like this:
@@ -349,6 +346,21 @@ Here we use an after script to modify the result set, like this:
 Notice how the entire results array is replaced by the single number and
 printed to stdout.
 
+### Get a Sorted, Unique List of All Sports
+
+This is an example of a JSON-to-JSON transformation that uses an after
+script to manipulate the result set. It should produce an array of all
+sports played by the people in the input set, sorted lexically, and with
+all duplicate elements removed.
+
+      cat /tmp/t \
+        | jsawk 'RS=RS.concat(this.sports); return null' -a 'return uniq(RS).sort()'
+
+Note the use of `return null` to prevent jsawk from adding the `this`
+object to the result set automatically. Instead we manipulated the result
+set explicitly, enabling each iteration to add more that one element to
+it---the entire `sports` array.
+
 JSON-to-Text Transformations
 ----------------------------
 
@@ -356,6 +368,9 @@ In the following examples we will be manipulating the JSON input to
 produce text output instead of JSON, for cases where you will be extracting
 information from a JSON data source and piping it to non JSON-accepting
 processes elsewhere.
+
+It is frequently useful to supress the regular JSON output when doing
+JSON-to-Text transformations like these, with the `-n` option.
 
 ### Get A List Of All Sports
 
