@@ -1005,12 +1005,12 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   while (blankcount < 10){  
     line=readline();  
 
-    if (line=="")  
+    if (!line || line.length==0)
       blankcount++;  
-    else  
+    else
       blankcount=0;  
     if (line==end) break;  
-    input += line;  
+    input += (line ? line : "");  
     input += "\n";  
   }  
   input = input.substring(0, input.length-blankcount);  
