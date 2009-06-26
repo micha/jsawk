@@ -942,6 +942,17 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   window.put = function(record) {
     IS = IS.slice(0, $_+1).concat([record]).concat(IS.slice($_+1));
   };
+  window.forEach = function(ary, fun) {
+    fun = eval("function(index,item) { "+fun+"; }");
+    for (var i=0; i<ary.length; i++) {
+      try {
+        fun.call(ary[i], i, ary[i]);
+      } catch (e) {
+        err("jsawk: js error: "+e);
+        quit(3);
+      }
+    }
+  };
 })(window.print);
 
 (function(argv) {
@@ -957,6 +968,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var fun = "";
   var noprint = false;
   var end = ".";
+  var libs    = [];
   var befores = [];
   var afters  = [];
   var queries = [];
@@ -982,7 +994,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         break;
       case "-f":
         if (argv.length < 1) usage();
-        load(argv.shift());
+        libs.push(argv.shift());
         break;
       case "-b":
         if (argv.length < 1) usage();
@@ -1022,6 +1034,9 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
   if (wrapped)
     IS = [ IS ];
+
+  for (i in libs)
+    load(libs[i]);
 
   var f = makeFilter(fun);
 
