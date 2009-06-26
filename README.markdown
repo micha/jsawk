@@ -151,6 +151,17 @@ functions and properties are available from within a jsawk script:
       METHODS
       -------
 
+        forEach(array, string)
+            Compiles 'string' into a function and iterates over the 'array',
+            running the function once for each element. The function has
+            access to the special variables 'index' and 'item' which are,
+            respectively, the array index and the array element. The 'this'
+            object is set to the array element each time the function runs.
+
+            params: Array array (array to iterate over)
+                    String string (the function source)
+            return: void
+
         get()
             Get the next record from the input set. This will prevent jsawk
             from iterating over that record.
