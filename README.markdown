@@ -63,12 +63,6 @@ Usage
       -n
           Suppress printing of JSON result set.
 
-      -d <delim>
-          Choose a token to indicate end of input. If this token appears on
-          a line by itself then reading of JSON input will end. Otherwise,
-          10 blank lines in a row will end input. (Don't look at me, this
-          is a spidermonkey issue.) Default delimiter is a single period.
-
       -q <query>
           Filter JSON through the specified JSONQuery query. If multiple
           '-q' options are specified then each query will be performed in

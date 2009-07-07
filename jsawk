@@ -12,11 +12,12 @@
 #   licenses of the incorporated software below.
 #
 
-TMP=`mktemp`
+TMP1=`mktemp /tmp/tmp.XXXXXX`
+TMP2=`mktemp /tmp/tmp.XXXXXX`
 
-trap "rm -f $TMP" SIGINT SIGTERM SIGHUP SIGQUIT
+trap "rm -f $TMP $TMP2" SIGINT SIGTERM SIGHUP SIGQUIT
 
-cat <<'__END__' > $TMP
+cat <<'__END__' > $TMP1
 
 window    = this;     // the global object
 window.IS = [];       // the input set
@@ -905,11 +906,20 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   };
   window.alert = p;
   window.doJson = function(input) {
-    try {
-      return eval("("+input+")");
-    } catch (e) {
-      err("jsawk: JSON parse error: '"+input+"'");
-      quit(2);
+    if (typeof input !== "string") {
+      return input;
+    } else {
+      input = input.replace(/\s*$/,"");
+      if (!input.length) {
+        return {};
+      } else {
+        try {
+          return eval("("+input+")");
+        } catch (e) {
+          err("jsawk: JSON parse error: '"+input+"'");
+          quit(2);
+        }
+      }
     }
   };
   window.doCall = function(fun, obj) {
@@ -958,6 +968,8 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 (function(argv) {
   argv = Array.prototype.slice.call(argv);
 
+  var inputLines = argv.shift();
+
   var usage = function() {
     err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] "+
         "[-b script] \\\n"+
@@ -967,7 +979,6 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
   var fun = "";
   var noprint = false;
-  var end = ".";
   var libs    = [];
   var befores = [];
   var afters  = [];
@@ -983,10 +994,6 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
         break;
       case "-n":
         noprint = true;
-        break;
-      case "-d":
-        if (argv.length < 1) usage();
-        end = argv.shift();
         break;
       case "-q":
         if (argv.length < 1) usage();
@@ -1016,23 +1023,13 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
     }
   }
 
-  // Spidermonkey can't read input well. This is a workaround
-  // from http://whereisandy.com/code/jslint/.
+  var input="";
 
-  var input="", line="", blankcount="0";  
-
-  while (blankcount < 10){  
-    line=readline();  
-
-    if (!line || line.length==0)
-      blankcount++;  
-    else
-      blankcount=0;  
-    if (line==end) break;  
+  for (var i=0; i<inputLines; i++) {
+    var line=readline();  
     input += (line ? line : "");  
     input += "\n";  
   }  
-  input = input.substring(0, input.length-blankcount);  
 
   var wrapped;
 
@@ -1078,7 +1075,10 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 })(arguments);
 __END__
 
-res=$(js $TMP "$@")
+echo "$(cat 2>/dev/null)" > $TMP2
+nlines=$(grep -c '$' $TMP2 2>/dev/null || echo 0)
+
+res=$(cat $TMP2 2>/dev/null | js $TMP1 $nlines "$@")
 ret=$?
 out=$(echo "$res" |sed '/^OUT: /s/^.....//p;d')
 err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
@@ -1086,6 +1086,6 @@ err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 [ -n "$err" ] && echo "$err" 1>&2
 [ -n "$out" ] && echo "$out"
 
-rm -f $TMP
+rm -f $TMP1 $TMP2
 
 exit $ret
