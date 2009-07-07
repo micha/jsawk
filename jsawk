@@ -961,7 +961,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var usage = function() {
     err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] "+
         "[-b script] \\\n"+
-        "           [-a script] [script]");
+        "           [-a script] [-v NAME=VALUE] [script]");
     quit(1);
   };
 
@@ -1003,6 +1003,13 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
       case "-a":
         if (argv.length < 1) usage();
         afters.push(makeFilter(argv.shift()));
+        break;
+      case "-v":
+        if (argv.length < 1) usage();
+        var tmp = argv.shift();
+        var key = tmp.replace(/=.*$/, "");
+        var val = tmp.replace(/^[^=]+=/, "");
+        window[key] = val;
         break;
       default:
         fun = arg;

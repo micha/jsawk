@@ -74,6 +74,9 @@ Usage
           '-q' options are specified then each query will be performed in
           turn, in the order in which they appeared on the command line.
 
+      -v <name=value>
+          Set global variable `name` to `value` in the script environment.
+
       -f <file>
           Load and run the specified JavaScript file prior to processing
           JSON. This option can be specified multiple times to load multiple
