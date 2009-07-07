@@ -971,7 +971,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var inputLines = argv.shift();
 
   var usage = function() {
-    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] [-d delim] "+
+    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] "+
         "[-b script] \\\n"+
         "           [-a script] [-v NAME=VALUE] [script]");
     quit(1);
@@ -1075,8 +1075,12 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 })(arguments);
 __END__
 
-echo "$(cat 2>/dev/null)" > $TMP2
-nlines=$(grep -c '$' $TMP2 2>/dev/null || echo 0)
+nlines=0
+
+if [ "$1" != "-h" ]; then
+  echo "$(cat 2>/dev/null)" > $TMP2
+  nlines=$(grep -c '$' $TMP2 2>/dev/null || echo 0)
+fi
 
 res=$(cat $TMP2 2>/dev/null | js $TMP1 $nlines "$@")
 ret=$?
