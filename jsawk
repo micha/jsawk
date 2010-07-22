@@ -15,7 +15,7 @@
 TMP1=`mktemp /tmp/tmp.XXXXXX`
 TMP2=`mktemp /tmp/tmp.XXXXXX`
 
-trap "rm -f $TMP $TMP2" SIGINT SIGTERM SIGHUP SIGQUIT
+trap "rm -f $TMP1 $TMP2" SIGINT SIGTERM SIGHUP SIGQUIT
 
 cat <<'__END__' > $TMP1
 
