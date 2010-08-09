@@ -320,6 +320,18 @@ a single string containing all of the person's sports, separated by commas.
 Notice how altering the `this` object in place alters the result array
 accordingly.
 
+### Extract Only The "Age" Property Of Each Element ###
+
+Normally we would modify the input set in place, by manipulating the `this`
+object, which would be returned by default after each iteration. However,
+sometimes we want only a single field from the input set.
+
+      cat /tmp/t | jsawk 'return this.age'
+
+Putting a return statement in the script expression causes the default
+return of `this` to be short-circuited, replacing this element with the
+return value in the output set.
+
 ### JSON Grep: Select Certain Elements From Input ###
 
 Sometimes you want to use awk to select certain records from the input set,
