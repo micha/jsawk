@@ -26,7 +26,7 @@ Install
 
 First, get the jsawk script:
 
-      curl https://github.com/micha/jsawk/raw/master/jsawk > jsawk
+      curl -L http://github.com/micha/jsawk/raw/master/jsawk > jsawk
 
 Then make it executable and put it somewhere in your path:
 
