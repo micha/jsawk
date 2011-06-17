@@ -932,7 +932,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   };
   window.makeFilter = function(fun) {
     try {
-      return eval("function() { "+fun+"; return this }");
+      return eval("(function() { "+fun+"; return this })");
     } catch (e) {
       err("jsawk: script parse error: '"+fun+"'");
       quit(3);
