@@ -13,6 +13,9 @@ increase your processing power, and other things.
 Setup
 -----
 
+[This is a great blog post on setup and basic use of jsawk and resty, thanks
+to @johnattebury.](http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard/)
+
 You need to have the `js` interpreter installed. On a Debian system you can
 install it with the following command: 
 
