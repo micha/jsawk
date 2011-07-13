@@ -1,6 +1,8 @@
 Quick Start
 ===========
 
+[Just added underscore.js to jsawk environment.](http://documentcloud.github.com/underscore/)
+
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 read from stdin, filter them using JavaScript to produce a results array
 that is printed to stdout. You can use this as a filter to manipulate data
@@ -139,6 +141,8 @@ functions and properties are available from within a jsawk script:
 
         RS
             The result set.
+
+        _   The underscore.js object.
 
         $_
             The current record index (corresponding to the index of the
