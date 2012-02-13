@@ -1,7 +1,7 @@
 Quick Start
 ===========
 
-[Just added underscore.js to jsawk environment.](http://documentcloud.github.com/underscore/)
+[Updated underscore.js to v1.3.1.](http://documentcloud.github.com/underscore/)
 
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 read from stdin, filter them using JavaScript to produce a results array
