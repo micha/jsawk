@@ -1105,7 +1105,7 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
   if (!noprint)
     out(RS);
-})(scriptArgs);
+})(typeof arguments === 'undefined' ? scriptArgs : arguments);
 __END__
 
 nlines=0
