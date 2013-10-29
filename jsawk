@@ -1004,9 +1004,8 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   var inputLines = argv.shift();
 
   var usage = function() {
-    err("Usage: jsq [-n] [-f jsfile1.js]* [-q jsonquery] "+
-        "[-b script] \\\n"+
-        "           [-a script] [-v NAME=VALUE] [script]");
+    err("Usage: jsawk [-n] [-j jsbin] [-f jsfile1.js]* [-q jsonquery] \\\n" +
+        "             [-b script] [-a script] [-v NAME=VALUE] [script]");
     quit(1);
   };
 
@@ -1022,6 +1021,9 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 
   while (arg = argv.shift()) {
     switch(arg) {
+      case "-j":
+        argv.shift();
+        break;
       case "-h":
         usage();
         break;
@@ -1109,14 +1111,32 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
 __END__
 
 nlines=0
+get_lines="yes"
 
-if [ "$1" != "-h" ]; then
+while getopts :hnj:q:f:b:a:v: opt; do
+  case $opt in
+    h) get_lines="no" ;;
+    j) js_arg=$OPTARG ;;
+  esac
+done
+
+if [ $get_lines != "no" ]; then
   echo "$(cat 2>/dev/null)" > $TMP2
   nlines=$(grep -c '$' $TMP2 2>/dev/null || echo 0)
 fi
 
-res=$(cat $TMP2 2>/dev/null | js $TMP1 $nlines "$@")
+if [ -e /etc/jsawkrc ]; then
+  . /etc/jsawkrc
+fi
+
+if [ -e ~/.jsawkrc ]; then
+  . ~/.jsawkrc
+fi
+
+JSBIN=${js_arg:-${JS:-js}}
+
 ret=$?
+res=$(cat $TMP2 2>/dev/null | js $TMP1 $nlines "$@")
 out=$(echo "$res" |sed '/^OUT: /s/^.....//p;d')
 err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 

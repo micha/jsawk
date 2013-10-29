@@ -1,5 +1,4 @@
-Quick Start
-===========
+# Quick Start
 
 *If you use Jsawk and want to help maintain it, please let me know and I'll add you to the repo.*
 
@@ -14,8 +13,7 @@ your JSON input to other formats and send that to stdout, to be piped to
 other processes. You can load JavaScript libraries on the command line to
 increase your processing power, and other things.
 
-Setup
------
+## Setup
 
 [This is a great blog post on setup and basic use of jsawk and resty, thanks
 to @johnattebury.](http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard/)
@@ -28,8 +26,7 @@ install it with the following command:
 Or you can [build it from source](http://www.mozilla.org/js/spidermonkey/).
 Ready? Go.
 
-Install
--------
+## Install
 
 First, get the jsawk script:
 
@@ -39,8 +36,7 @@ Then make it executable and put it somewhere in your path:
 
       chmod 755 jsawk && mv jsawk ~/bin/
 
-Use
----
+## Use
 
 Now you can do some stuff with JSON data. Here's an example using data from
 a REST service that serves JSON (we use [resty](http://github.com/micha/resty)
@@ -56,8 +52,7 @@ each JSON object it runs the little snippet of JavaScript, setting the
 output via stdout to `resty` again, which does the `PUT` request to update
 the resource.
 
-Usage
-=====
+## Usage
 
       jsawk [OPTIONS] [SCRIPT]
 
@@ -69,6 +64,9 @@ Usage
 
       -n
           Suppress printing of JSON result set.
+
+      -j <jsbin>
+          Specify path to spidermonkey js binary.
 
       -q <query>
           Filter JSON through the specified JSONQuery query. If multiple
@@ -99,6 +97,20 @@ Usage
       of the input array, if input is a JSON array, or on the object if
       it's an object. For each iteration, the `this` object is set to the
       current element.
+
+### Using A Specific JS Binary
+
+The path to the `js` binary can be specified in two different ways:
+
+* the `-j` command line option (see above)
+* the `JS` environment variable
+
+Additionally, jsawk will `source` the following files at startup if they exist:
+
+* _/etc/jsawkrc_
+* _~/.jsawkrc_
+
+These files can be used to export the `JS` environment variable.
 
 Jsawk Scripting
 ===============
