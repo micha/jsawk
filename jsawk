@@ -1315,7 +1315,7 @@ fi
 JSBIN=${js_arg:-${JS:-js}}
 
 ret=$?
-res=$(cat $TMP2 2>/dev/null | js $TMP1 $nlines "$@")
+res=$(cat $TMP2 2>/dev/null | $JSBIN $TMP1 $nlines "$@")
 out=$(echo "$res" |sed '/^OUT: /s/^.....//p;d')
 err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 
