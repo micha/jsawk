@@ -18,12 +18,10 @@ increase your processing power, and other things.
 [This is a great blog post on setup and basic use of jsawk and resty, thanks
 to @johnattebury.](http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard/)
 
-You need to have the `js` interpreter installed. On a Debian system you can
-install it with the following command: 
-
-      apt-get install spidermonkey-bin
+You need to have the `js` interpreter installed. Your best bet is to navigate to 
+the mozilla site [download and build the source](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey) 
+based on the maintained documentation there.
       
-Or you can [build it from source](http://www.mozilla.org/js/spidermonkey/).
 Ready? Go.
 
 ## Install
