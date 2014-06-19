@@ -2,7 +2,7 @@
 
 *If you use Jsawk and want to help maintain it, please let me know and I'll add you to the repo.*
 
-[Updated underscore.js to v1.3.1.](http://documentcloud.github.com/underscore/)
+[Updated underscore.js to v1.6.0.](http://documentcloud.github.com/underscore/)
 
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 read from stdin, filter them using JavaScript to produce a results array
