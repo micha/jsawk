@@ -57,28 +57,6 @@ the resource.
       OPTIONS
       -------
 
-      -h
-          Print short help page and exit.
-
-      -n
-          Suppress printing of JSON result set.
-
-      -j <jsbin>
-          Specify path to spidermonkey js binary.
-
-      -q <query>
-          Filter JSON through the specified JSONQuery query. If multiple
-          '-q' options are specified then each query will be performed in
-          turn, in the order in which they appeared on the command line.
-
-      -v <name=value>
-          Set global variable `name` to `value` in the script environment.
-
-      -f <file>
-          Load and run the specified JavaScript file prior to processing
-          JSON. This option can be specified multiple times to load multiple
-          JavaScript libraries.
-
       -b <script> | -a <script>
           Run the specified snippet of JavaScript before (-b) or after (-a)
           processing JSON input. The `this` object is set to the whole JSON
@@ -87,6 +65,34 @@ the resource.
           This option can be specified multiple times to define multiple
           before/after scripts, which will be applied in the order they
           appeared on the command line.
+
+      -f <file>
+          Load and run the specified JavaScript file prior to processing
+          JSON. This option can be specified multiple times to load multiple
+          JavaScript libraries.
+
+      -h
+          Print short help page and exit.
+
+      -i <file>
+          Read input JSON from `file` instead of stdin.
+
+      -j <jsbin>
+          Specify path to spidermonkey js binary.
+          
+      -n
+          Suppress printing of JSON result set.
+
+      -q <query>
+          Filter JSON through the specified JSONQuery query. If multiple
+          '-q' options are specified then each query will be performed in
+          turn, in the order in which they appeared on the command line.
+
+      -s <string>
+          Use `string` for input JSON instead of stdin.
+          
+      -v <name=value>
+          Set global variable `name` to `value` in the script environment.
 
       SCRIPT
       ------
