@@ -1181,6 +1181,8 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   while (arg = argv.shift()) {
     switch(arg) {
       case "-j":
+      case "-s":
+      case "-i":
         argv.shift();
         break;
       case "-h":
