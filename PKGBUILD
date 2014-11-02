@@ -22,4 +22,6 @@ package() {
   cd "$SRCDEST"
   install -dm755 "${pkgdir}"/usr/bin/
   install -Dm755 jsawk "${pkgdir}"/usr/bin/jsawk
+  
+  echo "export JS=/usr/bin/js24" >> /etc/jsawkrc
 } 
