@@ -15,7 +15,10 @@
 TMP1=$(mktemp /tmp/tmp.XXXXXX)
 TMP2=$(mktemp /tmp/tmp.XXXXXX)
 
-trap "rm -f $TMP1 $TMP2" SIGINT SIGTERM SIGHUP SIGQUIT
+cleanup() {
+  rm -f $TMP1 $TMP2
+}
+trap cleanup SIGINT SIGTERM SIGHUP SIGQUIT
 
 cat <<'__END__' > $TMP1
 
@@ -1321,6 +1324,6 @@ err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 [ "$err" ] && echo "$err" 1>&2
 [ "$out" ] && echo "$out"
 
-rm -f $TMP1 $TMP2
+cleanup
 
 exit $ret
