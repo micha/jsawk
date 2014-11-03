@@ -1286,10 +1286,10 @@ while getopts :hni:s:j:q:f:b:a:v: opt; do
 done
 
 if [ $get_lines != "no" ]; then
-  if [ -n "$input_string" ]; then
+  if [ "$input_string" ]; then
   	# Pass in the input string specified directly
   	echo "$input_string" > $TMP2
-  elif [ -n "$input_file" ]; then
+  elif [ "$input_file" ]; then
   	# Pass in the input file contents specified, first checking the file exists
   	if ! [ -e "$input_file" ]; then
   		echo "Error: Input file cannot be found: $input_file"
@@ -1318,8 +1318,8 @@ res=$(cat $TMP2 2>/dev/null | $JSBIN $TMP1 $nlines "$@")
 out=$(echo "$res" |sed '/^OUT: /s/^.....//p;d')
 err=$(echo "$res" |sed '/^ERR: /s/^.....//p;d')
 
-[ -n "$err" ] && echo "$err" 1>&2
-[ -n "$out" ] && echo "$out"
+[ "$err" ] && echo "$err" 1>&2
+[ "$out" ] && echo "$out"
 
 rm -f $TMP1 $TMP2
 
