@@ -12,8 +12,8 @@
 #   licenses of the incorporated software below.
 #
 
-TMP1=`mktemp /tmp/tmp.XXXXXX`
-TMP2=`mktemp /tmp/tmp.XXXXXX`
+TMP1=$(mktemp /tmp/tmp.XXXXXX)
+TMP2=$(mktemp /tmp/tmp.XXXXXX)
 
 trap "rm -f $TMP1 $TMP2" SIGINT SIGTERM SIGHUP SIGQUIT
 
