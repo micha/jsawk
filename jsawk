@@ -1298,7 +1298,7 @@ if [ $get_lines != "no" ]; then
   	cat "$input_file" > $TMP2
   else
   	# Read input from STDIN
-    echo "$(cat 2>/dev/null)" > $TMP2
+    cat 2>/dev/null > $TMP2
   fi
   nlines=$(grep -c '$' $TMP2 2>/dev/null || echo 0)
 fi
