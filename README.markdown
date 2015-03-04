@@ -2,7 +2,7 @@
 
 *If you use Jsawk and want to help maintain it, please let me know and I'll add you to the repo.*
 
-[Updated underscore.js to v1.6.0.](http://documentcloud.github.com/underscore/)
+[Updated underscore.js to v1.8.2.](http://documentcloud.github.com/underscore/)
 
 Jsawk is like awk, but for JSON. You work with an array of JSON objects
 read from stdin, filter them using JavaScript to produce a results array
@@ -18,10 +18,10 @@ increase your processing power, and other things.
 [This is a great blog post on setup and basic use of jsawk and resty, thanks
 to @johnattebury.](http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard/)
 
-You need to have the `js` interpreter installed. Your best bet is to navigate to 
-the mozilla site [download and build the source](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey) 
+You need to have the `js` interpreter installed. Your best bet is to navigate to
+the mozilla site [download and build the source](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
 based on the maintained documentation there.
-      
+
 Ready? Go.
 
 ## Install
@@ -79,7 +79,7 @@ the resource.
 
       -j <jsbin>
           Specify path to spidermonkey js binary.
-          
+
       -n
           Suppress printing of JSON result set.
 
@@ -90,7 +90,7 @@ the resource.
 
       -s <string>
           Use `string` for input JSON instead of stdin.
-          
+
       -v <name=value>
           Set global variable `name` to `value` in the script environment.
 
@@ -303,7 +303,7 @@ JSON-to-JSON Transformations
 
 These examples transform the input JSON, modifying it and returning the
 modified JSON as output on stdout to be piped elsewhere. Transformations of
-this type are generally done with a script that follows one of these simple 
+this type are generally done with a script that follows one of these simple
 patterns:
 
   1. Modify the `this` object in place (no `return` statement necessary).
@@ -360,8 +360,8 @@ return value in the output set.
 ### JSON Grep: Select Certain Elements From Input ###
 
 Sometimes you want to use awk to select certain records from the input set,
-leaving the rest unchanged. This is like the `grep` pattern of operation. In 
-this example we will extract all the records corresponding to people who are 
+leaving the rest unchanged. This is like the `grep` pattern of operation. In
+this example we will extract all the records corresponding to people who are
 over 30 years old.
 
       cat /tmp/t | jsawk 'if (this.age <= 30) return null'
@@ -377,7 +377,7 @@ a whole, somewhat similar to the way aggregate functions like `SUM()` or
 `COUNT()` work in SQL. These types of operations fall under a few basic
 patterns.
 
-  1. Use a before script (`-b` option) to do things to the JSON input before 
+  1. Use a before script (`-b` option) to do things to the JSON input before
      transformations are done by the main script.
   2. Use an after script (`-a` option) to do things to the JSON result set
      after all transformations are completed by the main script.
@@ -430,7 +430,7 @@ alphabetically.
 
 Notice the use of JSONQuery to drill down into the JSON objects, an "after"
 script to collate the results, and everything piped to the Unix `sort`
-tool to remove duplicate entries and do the lexical ordering.  This is 
+tool to remove duplicate entries and do the lexical ordering.  This is
 starting to show the power of the awk-like behavior now.
 
 ### Return a Boolean Value
@@ -448,8 +448,8 @@ zero for success.
 JSON Pretty-Printing
 ====================
 
-[Resty](http://github.com/micha/resty) includes the `pp` script that will 
-pretty-print JSON for you. You just need to install the JSON perl module 
+[Resty](http://github.com/micha/resty) includes the `pp` script that will
+pretty-print JSON for you. You just need to install the JSON perl module
 from CPAN. Use it like this:
 
       GET /blogs.json | jsawk -q '..author' | pp
