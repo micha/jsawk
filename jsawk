@@ -1220,9 +1220,13 @@ replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
   }
 
   var input="";
+  importPackage(java.io);
+  importPackage(java.lang);
+
+  var stdin = new BufferedReader( new InputStreamReader(System['in']) );
 
   for (var i=0; i<inputLines; i++) {
-    var line=readline();
+    var line=stdin.readLine();
     input += (line ? line : "");
     input += "\n";
   }
