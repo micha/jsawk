@@ -1,6 +1,6 @@
 # Contributor: Andreas B. Wagner <AndreasBWagner@pointfree.net>
 pkgname=jsawk-git
-pkgver=1.3.2.gc031fef
+pkgver=1.4.13.g5a14c4a
 pkgrel=1
 pkgdesc="like awk, but for JSON"
 arch=('i686' 'x86_64')
@@ -22,6 +22,7 @@ package() {
   cd "$SRCDEST"
   install -dm755 "${pkgdir}"/usr/bin/
   install -Dm755 jsawk "${pkgdir}"/usr/bin/jsawk
-  
-  echo "export JS=/usr/bin/js24" >> /etc/jsawkrc
-} 
+
+  install -dm755 "${pkgdir}"/etc
+  echo "export JS=/usr/bin/js24" >> "${pkgdir}"/etc/jsawkrc
+}
