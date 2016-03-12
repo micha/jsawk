@@ -13,6 +13,11 @@ your JSON input to other formats and send that to stdout, to be piped to
 other processes. You can load JavaScript libraries on the command line to
 increase your processing power, and other things.
 
+## Similar utilities
+
+* [json](https://github.com/trentm/json#readme)
+* [jq](https://stedolan.github.io/jq/)
+
 ## Setup
 
 [This is a great blog post on setup and basic use of jsawk and resty, thanks
