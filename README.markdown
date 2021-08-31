@@ -16,7 +16,7 @@ increase your processing power, and other things.
 ## Setup
 
 [This is a great blog post on setup and basic use of jsawk and resty, thanks
-to @johnattebury.](http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard/)
+to @johnattebury.](https://web.archive.org/web/20161116083846/http://johnattebury.com/blog/2011/06/spidermonkey-jsawk-resty-on-snow-leopard)
 
 You need to have the `js` interpreter installed. Your best bet is to navigate to
 the mozilla site [download and build the source](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey)
